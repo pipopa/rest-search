@@ -9,8 +9,10 @@ end
 
 get '/RestSearchAPI/' do
   keyid = "10d8ccc0f685608f8e951ef4053ee35e"
-  name = params['name']
-  params = URI.encode_www_form({ keyid: keyid, name: name})
+  latitude = params['latitude']
+  longitude = params['longitude']
+  range = params['range']
+  params = URI.encode_www_form({ keyid: keyid, latitude: latitude, longitude: longitude, range: range})
   uri = URI.parse("https://api.gnavi.co.jp/RestSearchAPI/v3/?#{params}")
   
   content_type :json

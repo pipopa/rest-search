@@ -4,5 +4,13 @@
     <meta charset="UTF-8">
   </head>
   <body>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+    <div id="rest">
+      <button v-on:click="restSearch">Search</button>
+      <rest-grid
+        :restraunt="gridData">
+      </rest-grid>
+    <script type="text/javascript" src="/js/gnavi.js"></script>
   </body>
 </html>
