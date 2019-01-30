@@ -2,6 +2,7 @@
 <html lang="ja">
   <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/modal.css">
   </head>
   <body>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
@@ -11,6 +12,14 @@
       <rest-grid
         :restraunt="gridData">
       </rest-grid>
+      <button id="show-modal" @click="showModal = true">Show Modal</button>
+      <modal v-if="showModal" @close="showModal = false">
+        <!--
+          you can use custom content here to overwrite
+          default content
+        -->
+        <h3 slot="header">店舗詳細</h3>
+      </modal>
     <script type="text/javascript" src="/js/gnavi.js"></script>
   </body>
 </html>

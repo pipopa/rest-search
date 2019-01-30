@@ -3,7 +3,7 @@ Vue.component('rest-grid', {
   template: `
     <div class="rest-grid">
       <table>
-      <tr v-for="rest in restraunt">
+      <tr v-for="rest in restraunt" v-on:click="greet">
         <td><img :src="rest.image_url.shop_image1" height="50" /></td>
         <td>{{ rest.name }}</td>
       </tr>
@@ -14,16 +14,56 @@ Vue.component('rest-grid', {
     restraunt: Array
   }, 
   methods: {
+    greet() {
+      console.log("hello");
+    } 
   }
+})
+
+Vue.component('modal', {
+  template: `
+    <transition name="modal">
+      <div class="modal-mask">
+        <div class="modal-wrapper">
+          <div class="modal-container">
+
+            <div class="modal-header">
+              <slot name="header">
+                default header
+              </slot>
+            </div>
+
+            <div class="modal-body">
+              <slot name="body">
+                default body
+              </slot>
+            </div>
+
+            <div class="modal-footer">
+              <slot name="footer">
+                default footer
+                <button class="modal-default-button" @click="$emit('close')">
+                  OK
+                </button>
+              </slot>
+            </div>
+          </div>
+        </div>
+      </div>
+    </transition>`, 
+  props: {
+    rest: Array
+  }, 
 })
 
 // bootstrap the demo
 var rest = new Vue({
   el: '#rest',
   data: {
-    searchQuery: '',
+    showModal: false, 
     gridData: [
     ]
+    
   }, 
   methods: {
     restSearch: function() {
