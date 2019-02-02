@@ -1,0 +1,16 @@
+#rest-detail {
+  display: grid;
+  grid-template-rows: 150px;
+  grid-template-columns: 80 1fr;
+  grid-template-areas:
+  "areaA areaB";
+}
+
+#rest-detail#image {
+  margin: 10px;
+  grid-area: "areaA";
+}
+
+#rest-detail#detail {
+  grid-area: "areaB";
+}

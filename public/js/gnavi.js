@@ -2,8 +2,12 @@
 Vue.component('rest-grid', {
   template: `
     <div class="rest-grid">
+      <modal 
+        v-if="showModal" 
+        @close="showModal = false"
+        :rest="clicked"></modal>
       <table>
-      <tr v-for="rest in restraunt" v-on:click="greet">
+      <tr v-for="rest in restraunt" v-on:click="showDetail(rest)">
         <td><img :src="rest.image_url.shop_image1" height="50" /></td>
         <td>{{ rest.name }}</td>
       </tr>
@@ -11,11 +15,18 @@ Vue.component('rest-grid', {
     </div>
   `,
   props: {
-    restraunt: Array
+    restraunt: Array, 
+  }, 
+  data: () => {
+    return {
+      clicked: {}, 
+      showModal: false
+    }
   }, 
   methods: {
-    greet() {
-      console.log("hello");
+    showDetail(rest) {
+      this.clicked = rest;
+      this.showModal = true;
     } 
   }
 })
@@ -33,10 +44,9 @@ Vue.component('modal', {
               </slot>
             </div>
 
-            <div class="modal-body">
-              <slot name="body">
-                default body
-              </slot>
+            <div class="modal-body" id="rest-detail">
+              <img id="image" :src="rest.image_url.shop_image1" height="50" />
+              <div id="detail">{{ rest.name }}</div>
             </div>
 
             <div class="modal-footer">
@@ -52,7 +62,7 @@ Vue.component('modal', {
       </div>
     </transition>`, 
   props: {
-    rest: Array
+    rest: Object
   }, 
 })
 
@@ -60,7 +70,6 @@ Vue.component('modal', {
 var rest = new Vue({
   el: '#rest',
   data: {
-    showModal: false, 
     gridData: [
     ]
     
